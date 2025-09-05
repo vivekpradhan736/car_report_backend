@@ -11,10 +11,18 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+const allowedOrigins = ['https://car-report-frontend.vercel.app'];
 app.use(cors({
-    origin: "https://car-report-frontend.vercel.app", // your React frontend URL
-    credentials: true, // allow cookies to be sent
-  }));
+  origin: (origin, callback) => {
+    // Check if the incoming origin is in the allowedOrigins array
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(cookieParser());
 
 // Routes
