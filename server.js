@@ -11,7 +11,7 @@ connectDB();
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:8080", // your React frontend URL
+    origin: "https://car-report-frontend.vercel.app", // your React frontend URL
     credentials: true, // allow cookies to be sent
   }));
 app.use(cookieParser());
