@@ -10,12 +10,12 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(express.json());
 app.use(cors({
     origin: "https://car-report-frontend.vercel.app", // your React frontend URL
     credentials: true, // allow cookies to be sent
   }));
 app.use(cookieParser());
-app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
