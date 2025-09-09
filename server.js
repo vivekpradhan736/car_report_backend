@@ -12,17 +12,14 @@ connectDB();
 const app = express();
 app.use(express.json());
 const allowedOrigins = ['https://car-report-frontend.vercel.app'];
-app.use(cors({
-  origin: (origin, callback) => {
-    // Check if the incoming origin is in the allowedOrigins array
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: allowedOrigins[0], // only allow your frontend
+    credentials: true,         // allow cookies to be sent
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(cookieParser());
 
 // Routes
