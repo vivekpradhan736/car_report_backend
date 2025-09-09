@@ -10,17 +10,19 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
 app.use(express.json());
+app.use(cookieParser());
+
 const allowedOrigins = ['https://car-report-frontend.vercel.app'];
 app.use(
   cors({
-    origin: allowedOrigins[0], // only allow your frontend
+    origin: allowedOrigins, // only allow your frontend
     credentials: true,         // allow cookies to be sent
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
