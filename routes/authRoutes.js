@@ -8,6 +8,7 @@ const router = express.Router();
 // @route   POST /api/auth/login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("test 1")
 
   const user = await User.findOne({ email });
   if (!user) return res.status(400).json({ message: "Invalid credentials" });
